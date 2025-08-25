@@ -73,7 +73,7 @@ while
     [ -h "$app_path" ]
 do
     ls=$( ls -ld "$app_path" )
-    link=${ls#*' -> '}
+    link=${ls#*\' -> \'}
     case $link in             #(
       /*)   app_path=$link ;; #(
       *)    app_path=$APP_HOME$link ;;
@@ -112,7 +112,7 @@ case "$( uname )" in                #(
   NONSTOP* )        nonstop=true ;;
 esac
 
-CLASSPATH=$APP_HOME/lib/gradle-launcher-8.4.jar
+CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
 
 
 # Determine the Java command to use to start the JVM.
@@ -124,19 +124,13 @@ if [ -n "$JAVA_HOME" ] ; then
         JAVACMD=$JAVA_HOME/bin/java
     fi
     if [ ! -x "$JAVACMD" ] ; then
-        die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME
-
-Please set the JAVA_HOME variable in your environment to match the
-location of your Java installation."
+        die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME\n\nPlease set the JAVA_HOME variable in your environment to match the\nlocation of your Java installation."
     fi
 else
     JAVACMD=java
     if ! command -v java >/dev/null 2>&1
     then
-        die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
-
-Please set the JAVA_HOME variable in your environment to match the
-location of your Java installation."
+        die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.\n\nPlease set the JAVA_HOME variable in your environment to match the\nlocation of your Java installation."
     fi
 fi
 
@@ -200,7 +194,7 @@ fi
 
 
 # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
-DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'" \"-javaagent:$APP_HOME/lib/agents/gradle-instrumentation-agent-8.4.jar\""
+DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
 
 # Collect all arguments for the java command:
 #   * DEFAULT_JVM_OPTS, JAVA_OPTS, JAVA_OPTS, and optsEnvironmentVar are not allowed to contain shell fragments,
@@ -244,6 +238,8 @@ eval "set -- $(
         xargs -n1 |
         sed ' s~[^-[:alnum:]+,./:=@_]~\\&~g; ' |
         tr '\n' ' '
-    )" '"$@"'
+    )" '$@'
 
 exec "$JAVACMD" "$@"
+
+
