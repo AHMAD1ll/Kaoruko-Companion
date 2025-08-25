@@ -27,6 +27,6 @@ jobs:
       run: ./gradlew clean
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew build -Dgradle.wrapper.disable-instrumentation=true
 
 
